@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "228241827067",
+    "project_id": "tracetnotes",
+    "storage_bucket": "tracetnotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228241827067:android:7123e2a45c086ff3963c5e",
+        "android_client_info": {
+          "package_name": "com.example.learning_dart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwKzLIohAZiULTengMb7CGsnfqo6LN3jA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228241827067:android:bcfae315d32d1e15963c5e",
+        "android_client_info": {
+          "package_name": "tracey.world.notes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwKzLIohAZiULTengMb7CGsnfqo6LN3jA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
