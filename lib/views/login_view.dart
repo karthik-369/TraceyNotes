@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_dart/firebase_options.dart';
+import 'package:learning_dart/views/register_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -39,66 +40,62 @@ class _LoginViewState extends State<LoginView> {
         // surfaceTintColor: Colors.orange,
         // bottom: Colors.yellowAccent,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              // TODO: Handle this case.
-              return Column(
-                children: [
-                  TextField(
-                    controller: _email,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration:
-                        const InputDecoration(hintText: "Enter your Email"),
-                  ),
-                  TextField(
-                    controller: _password,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: "Enter your password",
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      await Firebase.initializeApp(
-                        options: DefaultFirebaseOptions.currentPlatform,
-                      );
-
-                      final email = _email.text;
-                      final password = _email.text;
-
-                      // final userCredential = await FirebaseAuth.instance
-                      //     .createUserWithEmailAndPassword(
-                      //   email: email,
-                      //   password: password,
-                      // );
-
-                      try {
-                        final uc = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: email, password: password);
-                        print(uc);
-                      } on FirebaseAuthException catch (e) {
-                        print("Enter a valid username / password");
-                      }
-
-                      // print(userCredential);
-                    },
-                    child: const Text('Sign In'),
-                  ),
-                ],
+      body: Column(
+        children: [
+          TextField(
+            controller: _email,
+            enableSuggestions: false,
+            autocorrect: false,
+            keyboardType: TextInputType.emailAddress,
+            decoration:
+                const InputDecoration(hintText: "Enter your Email"),
+          ),
+          TextField(
+            controller: _password,
+            obscureText: true,
+            decoration: const InputDecoration(
+              hintText: "Enter your password",
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              await Firebase.initializeApp(
+                options: DefaultFirebaseOptions.currentPlatform,
               );
-            default:
-              return Text('Loading...');
-          }
-        },
-      ),
+
+              final email = _email.text;
+              final password = _email.text;
+
+              // final userCredential = await FirebaseAuth.instance
+              //     .createUserWithEmailAndPassword(
+              //   email: email,
+              //   password: password,
+              // );
+
+              try {
+                final uc = await FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                        email: email, password: password);
+                print(uc);
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/home', (route) => false);
+              } on FirebaseAuthException catch (e) {
+                print("Enter a valid username / password");
+              }
+
+              // print(userCredential);
+            },
+            child: const Text('Sign In'),
+          ),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/register', (route) => false);
+              },
+              child: const Text('Not Registered? Click Here'))
+        ],
+      )
+
     );
   }
 }
