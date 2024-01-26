@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learning_dart/firebase_options.dart';
 
@@ -39,6 +40,9 @@ class _RegisterViewState extends State<RegisterView> {
           // shadowColor: Colors.orange,
           // surfaceTintColor: Colors.orange,
           // bottom: Colors.yellowAccent,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Color.fromARGB(255, 30, 123, 33),
+          ),
         ),
         body: Column(
           children: [

@@ -3,9 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_dart/firebase_options.dart';
 import 'package:learning_dart/views/login_view.dart';
+import 'package:learning_dart/views/notes_view.dart';
 import 'package:learning_dart/views/register_view.dart';
 import 'package:learning_dart/views/verify_view.dart';
 // import 'package:learning_dart/views/register_view.dart';
+// import 'dart:developer' as tools show log;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,14 +38,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.amber,
-      appBar: AppBar(
-        title: const Text('Home'),
-        backgroundColor: Colors.green,
-        // foregroundColor: Colors.yellow,
-        // shadowColor: Colors.orange,
-        // surfaceTintColor: Colors.orange,
-        // bottom: Colors.yellowAccent,
-      ),
       body: FutureBuilder(
         future: Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform,
@@ -53,17 +47,19 @@ class HomePage extends StatelessWidget {
             case ConnectionState.done:
               // TODO: Handle this case.
               final user = FirebaseAuth.instance.currentUser;
-              if (user?.emailVerified ?? false) {
-                print("ulla po");
+              if (user != null) {
+                if (user.emailVerified) {
+                  return const NotesView();
+                } else {
+                  return VerifyEmail();
+                }
               } else {
-                print('vella po');
-                // Navigator.of(context).pushNamedAndRemoveUntil('/verify', (route) => false);
-                return const VerifyEmail();
+                return const LoginView();
               }
-              return const Text('Done');
+            // return const Text('Done');
             // return const LoginView();
             default:
-              return const Text('Loading...');
+              return const CircularProgressIndicator();
           }
         },
       ),
