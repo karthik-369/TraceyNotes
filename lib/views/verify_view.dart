@@ -3,8 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:learning_dart/constants/routes.dart';
 import 'package:learning_dart/firebase_options.dart';
-
+// import 'package:learning_dart/constants/routes.dart';
 class VerifyEmail extends StatefulWidget {
   const VerifyEmail({super.key});
 
@@ -50,11 +51,12 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     ),
                   ),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut();
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/login', (route) => false);
+                            register, (route) => false);
                       },
-                      child: const Text('Login'))
+                      child: const Text('Restart'))
                 ],
               );
             default:
