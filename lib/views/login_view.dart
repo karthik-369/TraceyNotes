@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learning_dart/constants/routes.dart';
 import 'package:learning_dart/firebase_options.dart';
 // import 'package:learning_dart/views/register_view.dart';
 import 'dart:developer' as tools;
@@ -83,7 +84,7 @@ class _LoginViewState extends State<LoginView> {
                   // print(uc);
                   tools.log(uc.toString());
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/notes', (route) => false);
+                      .pushNamedAndRemoveUntil(notes, (route) => false);
                 } on FirebaseAuthException catch (e) {
                   tools.log("Enter a valid username / password");
                   
@@ -96,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
             TextButton(
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/register', (route) => false);
+                      .pushNamedAndRemoveUntil(register, (route) => false);
                 },
                 child: const Text('Not Registered? Click Here'))
           ],

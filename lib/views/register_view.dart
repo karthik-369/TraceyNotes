@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:learning_dart/constants/routes.dart';
 import 'package:learning_dart/firebase_options.dart';
 import 'dart:developer' as tools;
 
@@ -78,7 +79,7 @@ class _RegisterViewState extends State<RegisterView> {
                   );
                   tools.log(userCredential.toString());
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/login', (route) => false);
+                      .pushNamedAndRemoveUntil(login, (route) => false);
                 } on FirebaseAuthException catch (e) {
                   tools.log(e.toString());
                   tools.log(e.runtimeType.toString());
@@ -95,7 +96,7 @@ class _RegisterViewState extends State<RegisterView> {
             TextButton(
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/login', (route) => false);
+                      .pushNamedAndRemoveUntil(login, (route) => false);
                 },
                 child: const Text('Registered already, Sigin here'))
           ],
