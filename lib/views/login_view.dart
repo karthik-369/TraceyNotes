@@ -6,6 +6,7 @@ import 'package:learning_dart/constants/routes.dart';
 import 'package:learning_dart/firebase_options.dart';
 // import 'package:learning_dart/views/register_view.dart';
 import 'dart:developer' as tools;
+import 'package:learning_dart/views/show_error_dialog.dart' as error;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -86,8 +87,11 @@ class _LoginViewState extends State<LoginView> {
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil(notes, (route) => false);
                 } on FirebaseAuthException catch (e) {
-                  tools.log("Enter a valid username / password");
-                  
+                  if (e.code == 'invalid-credential') {
+                    await error.errorDialog(context, "Invalid Email or Password");
+                  } else {
+                    await error.errorDialog(context, e.code.toString());
+                  }
                 }
 
                 // print(userCredential);
