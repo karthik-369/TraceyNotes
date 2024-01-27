@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learning_dart/firebase_options.dart';
+import 'dart:developer' as tools;
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -41,7 +42,7 @@ class _RegisterViewState extends State<RegisterView> {
           // surfaceTintColor: Colors.orange,
           // bottom: Colors.yellowAccent,
           systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Color.fromARGB(255, 30, 123, 33),
+            statusBarColor: Color.fromARGB(255, 30, 123, 33),
           ),
         ),
         body: Column(
@@ -75,17 +76,17 @@ class _RegisterViewState extends State<RegisterView> {
                     email: email,
                     password: password,
                   );
-                  print(userCredential);
+                  tools.log(userCredential.toString());
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil('/login', (route) => false);
                 } on FirebaseAuthException catch (e) {
-                  print(e);
-                  print(e.runtimeType);
-                  print(e.code);
+                  tools.log(e.toString());
+                  tools.log(e.runtimeType.toString());
+                  tools.log(e.code);
                   if (e.code == 'email-already-in-use') {
-                    print("Email Already in Use");
+                    tools.log("Email Already in Use");
                   } else if (e.code == 'weak-password') {
-                    print("Weak Password");
+                    tools.log("Weak Password");
                   }
                 }
               },

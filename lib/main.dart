@@ -26,6 +26,7 @@ void main() {
         '/register': (context) => const RegisterView(),
         '/home': (context) => const HomePage(),
         '/verify': (context) => const VerifyEmail(),
+        '/notes' : (context)=>const NotesView(),
       },
     ),
   );
